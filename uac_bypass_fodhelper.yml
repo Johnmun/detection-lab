@@ -1,0 +1,20 @@
+title: Suspicious Registry Modification via Fodhelper UAC Bypass
+id: 5a8aeb4b-1463-42e7-9d6c-dc23bc01e66c
+status: experimental
+description: Detects registry staging for the fodhelper.exe UAC bypass technique (T1548.002).
+author: Jonathan Munoz
+date: 2026/04/02
+tags:
+    - attack.privilege_escalation
+    - attack.t1548.002
+    - attack.defense_evasion
+logsource:
+    category: registry_set
+    product: windows
+detection:
+    selection:
+        TargetObject|contains: '\Software\Classes\ms-settings\shell\open\command'
+    condition: selection
+falsepositives:
+    - Highly unlikely. Native OS processes do not typically modify this user-level path.
+level: high
